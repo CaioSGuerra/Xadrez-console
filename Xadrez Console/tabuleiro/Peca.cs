@@ -16,6 +16,15 @@
             this.qteMovimentos = 0;
         }
 
+        public void incrementarQteMovimentos()
+        {
+            qteMovimentos++;
+        }
+        public void decrementarQteMovimentos()
+        {
+            qteMovimentos--;
+        }
+
         public bool existeMovimentosPossiveis()
         {
             bool[,] mat = movimentosPossiveis();
@@ -39,9 +48,6 @@
 
         public abstract bool[,] movimentosPossiveis();
 
-        public void incrementarQteMovimentos()
-        {
-            qteMovimentos++;
-        }
+
     }
 }
