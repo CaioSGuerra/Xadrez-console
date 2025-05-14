@@ -140,6 +140,22 @@ namespace xadrez
                 throw new TabuleiroException("Você não pode se colocar em xeque!");
             }
 
+            Peca p = tab.peca(destino);
+
+            //#jogodaespecial promocao
+            if (p is Peao)
+            {
+                if ((p.cor == Cor.Branca && destino.linha == 0) || (p.cor == Cor.Preta && destino.linha == 7))
+                {
+                    p = tab.retirarPeca(destino);
+                    pecas.Remove(p);
+                    Peca dama = new Dama(tab, p.cor);
+                    tab.colocarPeca(dama, destino);
+                    pecas.Add(dama);
+                }
+
+            }
+
             if (estaEmXeque(adversaria(jogadorAtual)))
             {
                 xeque = true;
@@ -158,7 +174,7 @@ namespace xadrez
                 mudaJogador();
             }
 
-            Peca p = tab.peca(destino);
+
 
             // #jogada especial EnPassant
             if (p is Peao && (destino.linha == origem.linha - 2 || destino.linha == origem.linha + 2))
@@ -329,7 +345,7 @@ namespace xadrez
             colocarNovaPeca('a', 2, new Peao(tab, Cor.Branca, this));
             colocarNovaPeca('b', 2, new Peao(tab, Cor.Branca, this));
             colocarNovaPeca('c', 2, new Peao(tab, Cor.Branca, this));
-            colocarNovaPeca('d', 5, new Peao(tab, Cor.Branca, this));
+            colocarNovaPeca('d', 2, new Peao(tab, Cor.Branca, this));
             colocarNovaPeca('e', 2, new Peao(tab, Cor.Branca, this));
             colocarNovaPeca('f', 2, new Peao(tab, Cor.Branca, this));
             colocarNovaPeca('g', 2, new Peao(tab, Cor.Branca, this));
@@ -351,7 +367,7 @@ namespace xadrez
             colocarNovaPeca('d', 7, new Peao(tab, Cor.Preta, this));
             colocarNovaPeca('e', 7, new Peao(tab, Cor.Preta, this));
             colocarNovaPeca('f', 7, new Peao(tab, Cor.Preta, this));
-            colocarNovaPeca('g', 4, new Peao(tab, Cor.Preta, this));
+            colocarNovaPeca('g', 7, new Peao(tab, Cor.Preta, this));
             colocarNovaPeca('h', 7, new Peao(tab, Cor.Preta, this));
         }
     }
